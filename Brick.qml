@@ -7,13 +7,10 @@ Rectangle {
     id: rect
     property int config: 14
     property bool light: false
-    property bool controller: true
-
 
     function rotate(){
-        if (Toolbar.flag != true){
         config = (config >>> 1) | ((config & 1) << 3)
-        }
+
     }
 
 

@@ -17,12 +17,12 @@ GridLayout {
         var newGameConfigs = helper.newGame()
         for (var i = 0; i < newGameConfigs.length; i++)
             bricks.itemAt(i).config = newGameConfigs[i]
-
+        gl.light()
     }
 
     function light(){
         var brickConfigs = []
-        for (var i = 0; i < bricks.count; i++)
+        for (var i = 0; i < 100; i++)
            brickConfigs.push(bricks.itemAt(i).config)
         var brickLights = helper.light(brickConfigs)
         for (var i = 0; i < brickLights.length; i++)
@@ -38,6 +38,6 @@ GridLayout {
         }
     }
     Component.onCompleted: {
-        newGame();
+        newGame()
     }
 }

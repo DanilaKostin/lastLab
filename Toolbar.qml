@@ -9,12 +9,16 @@ RowLayout{
     signal quitApp()
 
     function endGame(){
-        if (timerTime >= 80){
-            fTimer.running = false
+        if (timerTime == 0){
+            contr = false
             diag.open()
         }
     }
 
+    function pauseGame(){
+        if (contr ==false)
+                timerTime++
+    }
 
 
 
@@ -22,13 +26,12 @@ RowLayout{
         id: newGameButton
         text: "New Game"
         onClicked:{
-            rLay.timerTime = 0
-            fTimer.running = true
+            timerTime = 120
             newGame()
         }
     }
-        property int timerTime: 0
-        property bool contr: true
+
+
     TextField{
         id: timerField
         Layout.fillWidth: true
@@ -38,8 +41,9 @@ RowLayout{
             interval: 1000; running: true; repeat: true
 
             onTriggered:{
-                fTimer.running = contr
-                timerTime++
+               // fTimer.running = contr
+                pauseGame()
+                timerTime--
                 time.text = timerTime
 
                 endGame()
@@ -75,15 +79,15 @@ RowLayout{
     }
 
 
-Dialog{
- id: diag
- title: "Game over. Start new game?"
- standardButtons: StandardButton.Yes | StandardButton.No
+    Dialog{
+        id: diag
+        title: "Game over. Start new game?"
+        standardButtons: StandardButton.Yes | StandardButton.No
 
- onYes: {newGame()
-     rLay.timerTime = 0
-     fTimer.running = true
- }
- onNo: Qt.quit()
-}
+        onYes: {newGame()
+            timerTime = 120
+            contr = true
+        }
+        onNo: Qt.quit()
+    }
 }

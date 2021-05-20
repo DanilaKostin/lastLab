@@ -4,7 +4,8 @@ import QtQuick.Layouts 1.12
 
 Window {
     id: w
-
+    property int timerTime: 10
+    property bool contr: true
     minimumWidth: 600
     maximumWidth: 600
     width: 600
